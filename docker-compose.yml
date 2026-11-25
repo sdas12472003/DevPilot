@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16 # PG16 image with pgvector support
+    container_name: devpilot_postgres
+    environment:
+      POSTGRES_DB: devpilot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Supanta@1247
+    ports:
+      - "5433:5432" # Mapped to 5433 as his 5432 is in use
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Mounts the initialization SQL script inside the container
+      - ./docker/postgres/init_extensions.sql:/docker-entrypoint-initdb.d/init_extensions.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d devpilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

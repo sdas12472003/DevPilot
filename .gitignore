@@ -1,0 +1,36 @@
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.iml
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+application-local.properties
+application-secret.properties
+
+# Java / Maven (backend)
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/*.log
+
+# Node / Next.js (client)
+client/node_modules/
+client/.next/
+client/out/
+client/dist/
+client/.env*
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+client/.eslintcache
+client/*.tsbuildinfo
+client/next-env.d.ts
+
+# Docker / Local DB volumes (if any)
+docker/postgres/data/
+pgdata/
