@@ -1,13 +1,14 @@
 "use client"
 
-import { LogOut, Palette, ShieldCheck, Github } from "lucide-react"
+import { LogOut, Palette, ShieldCheck } from "lucide-react"
+import { GithubIcon } from "@/components/icons/github-icon" // or whatever the component name is in github-icon.tsx
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/ui/mode-toggle"
-import { useCurrentUser, useLogout } from "@/hooks/use-auth"
+import { useCurrentuser, useLogout } from "@/hooks/use-auth" // match exact export in use-auth.ts
 
 export function SettingsDashboard() {
-  const { data: user } = useCurrentUser()
+  const { data: user } = useCurrentuser()
   const logoutMutation = useLogout()
 
   const initials = (user?.displayName || user?.githubUsername || "DP")
@@ -26,7 +27,7 @@ export function SettingsDashboard() {
       {/* GitHub Account Card */}
       <div className="rounded-2xl border border-border/60 bg-card/80 p-5 shadow-xs">
         <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          <Github className="h-3.5 w-3.5 text-primary" />
+          <GithubIcon className="h-3.5 w-3.5 text-primary" />
           Connected GitHub Account
         </div>
 

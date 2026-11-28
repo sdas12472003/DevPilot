@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import {
   CheckCircle2,
   Database,
@@ -80,7 +79,6 @@ function StatusBadge({ status }: { status: IndexStatus }) {
 }
 
 export function RepoCard({ repo, className }: RepoCardProps) {
-  const router = useRouter()
   const startIndexing = useStartIndexing()
 
   const progress = getRepoProgress(repo)
@@ -89,11 +87,7 @@ export function RepoCard({ repo, className }: RepoCardProps) {
   const isFailed = repo.indexStatus === "FAILED"
 
   const handleStartIndex = () => {
-    startIndexing.mutate(repo.id, {
-      onSuccess: () => {
-        router.push(`/chat/${repo.id}`)
-      },
-    })
+    startIndexing.mutate(repo.id)
   }
 
   return (
@@ -204,13 +198,15 @@ export function RepoCard({ repo, className }: RepoCardProps) {
 
           {/* Index / Progress / Re-index Pill Tab */}
           {isIndexing ? (
-            <Link
-              href={`/chat/${repo.id}`}
-              className="inline-flex h-8 cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-blue-500/15 px-3 text-xs font-medium text-blue-600 ring-1 ring-blue-500/30 transition-all duration-200 hover:bg-blue-500/20 dark:text-blue-400"
+            <button
+              type="button"
+              disabled
+              title="Repository indexing in progress"
+              className="inline-flex h-8 cursor-default items-center justify-center gap-1.5 rounded-lg bg-blue-500/15 px-3 text-xs font-medium text-blue-600 ring-1 ring-blue-500/30 dark:text-blue-400"
             >
               <Loader2 className="size-3.5 animate-spin" />
               <span>Indexing...</span>
-            </Link>
+            </button>
           ) : (
             <button
               type="button"

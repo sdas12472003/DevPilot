@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useRepos, useRefreshRepos } from "@/hooks/use-repo"
 
 export function OverviewDashboard() {
-  const { data: repos = [], isLoading } = useRepos(false)
+  const { data: repos = [], isLoading } = useRepos()
   const refreshMutation = useRefreshRepos()
 
   const totalRepos = repos.length
@@ -64,32 +64,31 @@ export function OverviewDashboard() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex shrink-0 items-center gap-2.5">
           <Button
             type="button"
             variant="outline"
             size="sm"
             onClick={() => refreshMutation.mutate()}
             disabled={refreshMutation.isPending}
-            className="rounded-xl"
+            className="h-9 shrink-0 cursor-pointer rounded-xl px-3.5 text-xs whitespace-nowrap"
           >
             <RefreshCw
-              className={`mr-1.5 h-3.5 w-3.5 ${
+              className={`mr-1.5 size-3.5 shrink-0 ${
                 refreshMutation.isPending ? "animate-spin" : ""
               }`}
             />
             {refreshMutation.isPending ? "Syncing..." : "Sync Repos"}
           </Button>
-          <Button
-            asChild
-            size="sm"
-            className="rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:from-indigo-500 hover:to-violet-500"
+
+          <Link
+            href="/dashboard"
+            className="group inline-flex h-9 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 px-3.5 text-xs font-medium whitespace-nowrap text-white shadow-sm ring-1 ring-indigo-500/30 transition-all duration-200 hover:-translate-y-0.5 hover:from-indigo-500 hover:via-violet-500 hover:to-pink-500 hover:shadow-md hover:shadow-violet-500/25 active:translate-y-0"
           >
-            <Link href="/dashboard">
-              Manage Repos
-              <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
-            </Link>
-          </Button>
+            <FolderGit2 className="size-3.5 shrink-0" />
+            <span>Manage Repos</span>
+            <ArrowUpRight className="size-3.5 shrink-0 opacity-85 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
       </div>
 
@@ -165,12 +164,13 @@ export function OverviewDashboard() {
                   </p>
                 </div>
 
-                <Button asChild size="sm" variant="secondary" className="h-8 rounded-lg text-xs">
-                  <Link href={`/chat/${repo.id}`}>
-                    <MessageSquare className="mr-1.5 h-3.5 w-3.5" />
-                    Chat
-                  </Link>
-                </Button>
+                <Link
+                  href={`/chat/${repo.id}`}
+                  className="inline-flex h-8 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-secondary px-3 text-xs font-medium text-secondary-foreground transition-colors hover:bg-secondary/80"
+                >
+                  <MessageSquare className="size-3.5 shrink-0" />
+                  <span>Chat</span>
+                </Link>
               </div>
             ))}
           </div>

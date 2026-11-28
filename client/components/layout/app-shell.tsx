@@ -186,7 +186,7 @@ export function AppShell({ children }: AppShellProps) {
       </Sidebar>
 
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-2 border-b bg-background/90 px-4 backdrop-blur-md">
+        <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center justify-between gap-2 border-b bg-background px-4 shadow-2xs">
           <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1 cursor-pointer" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -229,7 +229,7 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </header>
 
-        <main className="bg-saas-canvas relative flex-1 overflow-x-hidden p-6">
+        <main className="bg-saas-canvas relative z-0 flex-1 overflow-x-hidden p-6">
           <div
             aria-hidden="true"
             className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-55 dark:opacity-0"
